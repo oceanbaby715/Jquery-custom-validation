@@ -1,0 +1,306 @@
+<html>
+
+<head>
+	<title>表单演示</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="../../bower_components/jquery.query.js/jquery.query.js"></script>
+	<script src="../../bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="../../dist/qxun.custom.validation.min.js"></script>
+	<script src="../../dist/jquery.qxun.form.js"></script>
+	<style type="text/css">
+		label.error {
+			color: red;
+			font-size: 12px
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h1>自定义表单验证测试</h1> </div>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="" id="form1">
+					<div class="form-group">
+						<label for="" id="testTitle">请输入邮箱地址</label>
+						<input type="text" class="form-control" name="testName" id="testName"> </div>
+					<div class="form-group">
+						<label for="">正则表达式</label>
+						<textarea class="form-control" readonly="readonly" id="regString" rows="10" style="font-size: 20px;"></textarea>
+						<br>
+						<p class="text-right">
+							<button type="button" class="btn btn-info" id="AnalysisBtn">
+								<span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+								 分析此表达式
+							</button>
+						</p>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">特殊需求验证</div>
+					<div class="panel-body">
+						<div class="col-md-6">
+							<div class="radio">
+								<label>
+									<input checked type="radio" rules="isEmail" name="optionsRadios" value="/^([a-zA-Z0-9]{1,63}|[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])@(([a-zA-Z0-9]+|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.){0,3}((com)|(net)|(org)|(gov\.cn)|(info)|(cc)|(com\.cn)|(net\.cn)|(org\.cn)|(name)|(biz)|(tv)|(cn)|(mobi)|(name)|(sh)|(ac)|(io)|(tw)|(com\.tw)|(hk)|(com\.hk)|(ws)|(travel)|(us)|(tm)|(la)|(me\.uk)|(org\.uk)|(ltd\.uk)|(plc\.uk)|(in)|(eu)|(it)|(jp))$/">Email地址</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isDomain" name="optionsRadios" value="/^(([a-zA-Z0-9]+|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.){0,3}((com)|(net)|(org)|(gov\.cn)|(info)|(cc)|(com\.cn)|(net\.cn)|(org\.cn)|(name)|(biz)|(tv)|(cn)|(mobi)|(name)|(sh)|(ac)|(io)|(tw)|(com\.tw)|(hk)|(com\.hk)|(ws)|(travel)|(us)|(tm)|(la)|(me\.uk)|(org\.uk)|(ltd\.uk)|(plc\.uk)|(in)|(eu)|(it)|(jp))$/">域名</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isURL" name="optionsRadios" value="/^(https:\/\/|http:\/\/)?((([a-zA-Z0-9]+|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.){0,3}((com)|(net)|(org)|(gov\.cn)|(info)|(cc)|(com\.cn)|(net\.cn)|(org\.cn)|(name)|(biz)|(tv)|(cn)|(mobi)|(name)|(sh)|(ac)|(io)|(tw)|(com\.tw)|(hk)|(com\.hk)|(ws)|(travel)|(us)|(tm)|(la)|(me\.uk)|(org\.uk)|(ltd\.uk)|(plc\.uk)|(in)|(eu)|(it)|(jp))|(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d))(:[0-9]{1,4})?((\/?)|(\/[0-9A-Za-z_!~*'().;?:@&=+$,%#-]+)+\/?)$/">网址</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isMobile" name="optionsRadios" value="/^(((13[0-9]{1})|(14[5|7]{1})|(15[0|1|2|3|5|6|7|8|9]{1})|(17[0|3|6|7|8]{1})|(18[0-9]{1}))+\d{8})$/">国内手机号码</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isTelphone" name="optionsRadios" value="/^(0\d{2,3})?(-)?\d{7,8}(-\d{1,6})?$/">国内电话号码</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isOldIdCardNo" name="optionsRadios" value="/^\d{2}(0[1-9]|[1-9][0-9])\d{2}\d{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])\d{3}$/">大陆身份证号（一代）</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isIdCardNo" name="optionsRadios" value="/^\d{2}(0[1-9]|[1-9][0-9])\d{2}((((1[6-9]|[2-9]\d)\d{2})(0[13578]|1[02])(0[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})(0[13456789]|1[012])(0[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})02(0[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))0229))\d{3}(\d|x|X)$/">大陆身份证号（二代）</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isFullDate" name="optionsRadios" value="/^((((1[6-9]|[2-9]\d)\d{2})-(0?[13578]|1[02])-(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})-(0?[13456789]|1[012])-(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29)) (0\d|1\d|2[0-4]):([0|1|2|3|4|5]\d):([0|1|2|3|4|5]\d)$/">完整日期格式</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isQQ" name="optionsRadios" value="/^[1-9][0-9]{4,10}$/">腾讯QQ号</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isWeixin" name="optionsRadios" value="/^[a-zA-z](\w|_|-){5,19}$/">微信号</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isZipCode" name="optionsRadios" value="/^[0-9]{6}$/">中国邮政编码</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isIP" name="optionsRadios" value="/^(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)$/">IP地址</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isWeakPassword" name="optionsRadios" value="/(?=.{6,}).*/">弱密码</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isMediumPassword" name="optionsRadios" value="/^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$/">中等强度密码</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isStrongPassword" name="optionsRadios" value="/^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$/">强密码</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isMoney" name="optionsRadios" value="/^-?((0(\.\d{1,2})?)|([1-9]\d*(\.\d{1,2})?))$/">金额</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isImage" name="optionsRadios" value="/^[^\s](.*)+\.(jpg|bmp|gif|ico|svg|jpeg|png|psd|pcx|dxf|cdr)$/i;">图片格式</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isVideo" name="optionsRadios" value="/^[^\s](.*)+\.(avi|mov|asf|wmv|navi|3gp|ra|rm|ram|rmvb|mkv|flv|mp4)$/i">视频格式</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isAudio" name="optionsRadios" value="/^[^\s](.*)+\.(cda|wav|aiff|au|mpeg|mp3|midi|wma|vqf|ogg|amr)$/i">音频格式</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isTime" name="optionsRadios" value="([01][0-9]|2[0-4]):[0-5][0-9]:[0-5][0-9]">时间</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isDate" name="optionsRadios" value="/^((((1[6-9]|[2-9]\d)\d{2})-(0?[13578]|1[02])-(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})-(0?[13456789]|1[012])-(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29))$/">年月日</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-info">
+					<div class="panel-heading">各类证件号码验证</div>
+					<div class="panel-body">
+						<div class="col-md-6">
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isDriverNumber" name="optionsRadios" value="">驾驶证号</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isVIN" name="optionsRadios" value="">车架号</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isEngineNumber" name="optionsRadios" value="/^([A-Z0-9-.*\s\/]{5,})$/">发动机号</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isVehicleNumber" name="optionsRadios" value="">车牌号</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isOfficerCard" name="optionsRadios" value="/^[\u4E00-\u9FA5]{1,2}[\d-]{6,8}$/">军官证号(仅供参考)</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isHKMacaoCard" name="optionsRadios" value="/^[CW]\d{8}$/">港澳通行证号(仅供参考)</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isTWCompatriotsCard" name="optionsRadios" value="/^\d{8,10}(\([A-Z,0-9]{1}\))?$/">台胞证号(仅供参考)</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isChinesePassport" name="optionsRadios" value="/^((1[45]\d{7})|([G|g]\d{8})|([P|p]\d{7})|([S|s]\d{7,8})|([D|d]\d+)|([E|e]\d{8}))$/">中国护照号</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isMTPforHKMacao" name="optionsRadios" value="/^([HM])\d{10}$/">回乡证号</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-warning">
+					<div class="panel-heading">数字类验证</div>
+					<div class="panel-body">
+						<div class="col-md-6">
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isPositiveInteger" name="optionsRadios" value="/^[1-9]\d*$/">正整数</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isNegtiveInteger" name="optionsRadios" value="/^-[1-9]\d*$/">负整数</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isInteger" name="optionsRadios" value="/^-?[1-9]\d*$/">整数</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isNonNegtiveInteger" name="optionsRadios" value="/^[1-9]\d*|0$/">非负整数（正整数 + 0）</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isNonPositiveInteger" name="optionsRadios" value="/^-[1-9]\d*|0$/">非正整数（负整数 + 0）</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isPositiveFloat" name="optionsRadios" value="/^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/">正浮点数</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isNegativeFloat" name="optionsRadios" value="/^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$/">负浮点数</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isFloat" name="optionsRadios" value="/^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$/">浮点数</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isNonNegativeFloat" name="optionsRadios" value="/^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$/">非负浮点数（正浮点数 + 0）</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isNonPositiveFloat" name="optionsRadios" value="/^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$/">非正浮点数（负浮点数 + 0）</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-success">
+					<div class="panel-heading">字符类验证</div>
+					<div class="panel-body">
+						<div class="col-md-6">
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isChinese" name="optionsRadios" value="/^[\u4E00-\u9FA5]+$/">中文</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isEnglishLetter" name="optionsRadios" value="/^[A-Za-z]+$/">英文字母</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isUppercaseEnglishLetter" name="optionsRadios" value="/^[A-Z]+$/">大写英文字母</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isLowercaseEnglishLetter" name="optionsRadios" value="/^[a-z]+$/">小写英文字母</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isNumAndLetters" name="optionsRadios" value="/^[A-Za-z0-9]+$/">数字和26个英文字母</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" rules="isNumAndLettersAndUnderline" name="optionsRadios" value="/^\w+$/">数字、26个英文字母或者下划线</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function () {
+			$("#form1").validate({
+				rules: {
+					testName: "isEmail"
+				, }
+			});
+			var rules=$.query.get('rules');
+			if (rules!="") {
+				$("input[type=radio][rules="+rules+"]").prop("checked",true);
+				$("#regString").val($("input[type=radio][rules="+rules+"]").val());
+				$("#testTitle").text("请输入" + $.trim($("input[type=radio][rules="+rules+"]").parent().text()));
+				$("#testName").rules("remove", "isEmail");
+				$("#testName").rules("add", rules);
+			}
+			$("input[type=radio]").change(function () {
+				$("#regString").val($(this).val());
+				$("#testTitle").text("请输入" + $.trim($(this).parent().text()));
+				$("#testName").val("");
+				$("label.error").remove();
+				var newRules = $(this).attr("rules");
+				var rules = $("#testName").rules();
+				jQuery.each(rules, function (i, val) {
+					$("#testName").rules("remove", i);
+					var obj = {};
+					obj[newRules] = true;
+					$("#testName").rules("add", obj);
+				});
+			});
+			//分析正则表达式
+			$("#AnalysisBtn").click(function(){
+				var regStr=$("#regString").val();
+				location.href="https://regexper.com/#"+regStr;
+			});
+
+		});
+	</script>
+</body>
+
+</html>

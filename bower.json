@@ -1,0 +1,25 @@
+{
+  "name": "jquery.custom.validation",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "oceanbaby715 <liuhaiyang715@163.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7",
+    "jquery-validation": "^1.16.0"
+  },
+  "devDependencies": {
+    "jquery.query.js": "^2.1.7"
+  }
+}
